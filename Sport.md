@@ -6,28 +6,58 @@
 
 ## Suggested Tech Stack
 
-### 1. Frontend
-- **HTML/CSS**: For building the user interface.
-- **JavaScript**: For client-side scripting.
-- **Bootstrap**: To make the UI responsive and visually appealing.
-- **jQuery**: For simplifying DOM manipulations and AJAX calls.
+| **Frontend**          | **Backend**         |
+|-----------------------|---------------------|
+| **HTML/CSS**: For building the user interface. | **Java**: As the primary programming language for the application. |
+| **JavaScript**: For client-side scripting. | **Spring Boot**: A framework that simplifies Java web application development, making it easier to set up and manage RESTful APIs. |
+| **Bootstrap**: To make the UI responsive and visually appealing. | **JDBC**: For database connectivity, allowing Java to interact with the MySQL database. |
+| **jQuery**: For simplifying DOM manipulations and AJAX calls. |                     |
 
-### 2. Backend
-- **Java**: As the primary programming language for the application.
-- **Spring Boot**: A framework that simplifies Java web application development, making it easier to set up and manage RESTful APIs.
-- **JDBC**: For database connectivity, allowing Java to interact with the MySQL database.
-
-### 3. Database
+### Database
 - **MySQL**: To store all the data related to players, matches, and performance metrics.
 
-### 4. Development Tools
+### Development Tools
 - **IDE**: IntelliJ IDEA or Eclipse for Java development.
 - **Postman**: For testing RESTful APIs during development.
 - **Version Control**: Git for version control and collaboration.
 
-### 5. Deployment
+### Deployment
 - **Apache Tomcat**: For deploying the Java web application.
 - **Heroku or AWS**: For hosting the application if you want it to be accessible over the internet.
+
+## Prerequisites
+
+### 1. Basic Knowledge
+- **Java**: Familiarity with core Java concepts such as object-oriented programming (OOP), data structures, and exception handling.
+- **HTML/CSS**: Basic understanding of web development and markup languages for building user interfaces.
+- **JavaScript**: Fundamental knowledge of JavaScript for client-side scripting.
+
+### 2. Development Tools
+- **IDE**: Install IntelliJ IDEA or Eclipse for Java development.
+- **MySQL**: Install MySQL Server and MySQL Workbench for database management.
+- **Postman**: For testing RESTful APIs during development.
+- **Git**: Version control system for managing your codebase.
+
+### 3. Frameworks and Libraries
+- **Spring Boot**: Familiarity with the basics of Spring Boot, including creating RESTful services and dependency management.
+- **Bootstrap**: Understanding how to use Bootstrap for responsive design.
+- **jQuery**: Basic knowledge of jQuery for simplifying DOM manipulations.
+
+### 4. Database Design
+- Understanding of relational databases and SQL for creating and managing the MySQL database.
+
+### 5. Environment Setup
+- **JDK**: Ensure you have Java Development Kit (JDK) installed on your system.
+- **Maven/Gradle**: Basic knowledge of Maven or Gradle for dependency management in your Java project.
+- **Apache Tomcat**: Knowledge of how to set up and deploy Java web applications using Tomcat.
+
+### 6. Additional Skills (Optional)
+- Familiarity with version control (Git) for collaborative development.
+- Basic knowledge of RESTful API concepts and how to consume APIs from the frontend.
+- Understanding of AJAX and how it works for asynchronous requests.
+
+### 7. Resources
+- Access to online resources, documentation, and tutorials for Java, Spring Boot, MySQL, HTML, CSS, and JavaScript to aid in your learning and development process.
 
 ## Steps to Build the Project
 
@@ -76,3 +106,4 @@
 ## Conclusion
 
 This approach provides a structured pathway to develop your cricketer performance tracker. By using familiar technologies and frameworks, you can create a functional application while gaining valuable experience in web development with Java and MySQL. If you have specific areas where you want more guidance or details, feel free to ask!
+
