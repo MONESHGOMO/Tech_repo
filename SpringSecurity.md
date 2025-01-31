@@ -54,3 +54,44 @@ welcome Spring Session ID : 7454F2459EF2F2C8845F043B22D982D2
 - Login : ***http://localhost:8080/login***
 - userName : gomo
 - Password : gomo
+  ***
+
+### CSRF (Cross-Site Request Forgery) in Security and Spring Boot
+
+**What is CSRF?**
+
+Cross-Site Request Forgery (CSRF) is a type of attack where a malicious actor tricks a user into performing unwanted actions on a web application in which they are authenticated. The attacker exploits the trust that a website has in the user's browser, causing unauthorized actions on behalf of the user.
+
+**How CSRF Works:**
+- An attacker tricks a logged-in user into making an HTTP request (like submitting a form) to a website where the user has valid credentials.
+- The malicious request is sent with the user's credentials (like cookies), so the server thinks the request is legitimate.
+
+**CSRF Protection in Spring Security**
+
+Spring Security has built-in support for preventing CSRF attacks. By default, CSRF protection is enabled in Spring Security. Here’s how it works:
+
+**How CSRF Protection Works:**
+
+1. **CSRF Token**: Every request that modifies state (e.g., POST, PUT, DELETE) requires a CSRF token, which is a unique token sent along with the request to validate that the request is coming from an authenticated source.
+2. **Token Storage**: The CSRF token is stored in the user's session and is included as a hidden field in forms. It must match the token provided in the HTTP request to prevent CSRF.
+3. **Token Verification**: On the server side, Spring Security verifies that the token sent with the request matches the token stored in the session. If it does not match, the request is rejected.
+
+**Disabling CSRF Protection in Spring Boot**
+In some cases, such as when using a stateless REST API, you may want to disable CSRF protection. Here’s how to disable CSRF protection in a Spring Boot application:
+
+```java
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()  // Disable CSRF protection in spring 5 not in spring 6 we use lamda expression to disable 
+            .authorizeRequests()
+            .anyRequest().authenticated();
+    }
+}
+
