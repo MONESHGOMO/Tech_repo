@@ -79,19 +79,54 @@ Spring Security has built-in support for preventing CSRF attacks. By default, CS
 **Disabling CSRF Protection in Spring Boot**
 In some cases, such as when using a stateless REST API, you may want to disable CSRF protection. Here’s how to disable CSRF protection in a Spring Boot application:
 
-```java
+- Without lamda expression
+``` java
+package com.gomocodes.gomo.configurations;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 
+import java.beans.Customizer;
+
+@Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()  // Disable CSRF protection in spring 5 not in spring 6 we use lamda expression to disable 
-            .authorizeRequests()
-            .anyRequest().authenticated();
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+                .csrf(Customizer-> Customizer.disable())   //spring 6 springboot 3
+                .build();
     }
 }
+
+```
+-With lamda expression
+```java
+package com.gomocodes.gomo.configurations;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.SecurityFilterChain;
+
+import java.beans.Customizer;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+                .csrf(AbstractHttpConfigurer::disable)  //spring 6 springboot 3
+                .build();
+    }
+}
+
 
