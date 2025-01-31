@@ -128,5 +128,27 @@ public class SecurityConfiguration {
                 .build();
     }
 }
+```
 
+## If we want to get the CSRF Token :
+    - enable spring security 
+    - go for basic auth
+    
+    
+
+``` java
+@GetMapping("/token")
+    public CsrfToken getToken(HttpServletRequest request){
+        return (CsrfToken) request.getAttribute("_csrf");
+    }
+```
+- output 
+``` json
+{
+    "parameterName": "_csrf",
+    "token": "GhI_Fg38SlTkbAOFM9eirG3czUoLbXiXMvWmudq-Dep_1RkSLncJJDqee2LJWmbmAPqWygjl4CtoD0u6B8bDge6JOdIetisl",
+    "headerName": "X-CSRF-TOKEN"
+}
+
+```
 
