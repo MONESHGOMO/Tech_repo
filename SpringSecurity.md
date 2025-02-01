@@ -152,3 +152,27 @@ public class SecurityConfiguration {
 
 ```
 
+
+- Inmemory User
+``` java
+ @Bean
+    public UserDetailsService userDetailsService() {
+
+        UserDetails user1 = User
+                .withDefaultPasswordEncoder()   // default password encoder , not use in production ,use only for learning purpose
+                .username("kiran")
+                .password("kiran@123")
+                .roles(("USER"))
+                .build(); // return the instance of userDetails
+        UserDetails user2 = User
+                .withDefaultPasswordEncoder()
+                .username("harsh")
+                .password("harsh@123")
+                .roles(("ADMIN"))
+                .build();
+
+        return new InMemoryUserDetailsManager(user1,user2);
+    }
+```
+
+
