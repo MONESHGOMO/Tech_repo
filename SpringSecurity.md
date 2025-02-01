@@ -196,3 +196,44 @@ public class SecurityConfiguration {
 
 ```
 
+## Password encoder implementing using our code 
+``` java
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.stereotype.Service;
+
+@Service
+public class SecurityConfig {
+
+    @Bean
+    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+        UserDetails user1 = User.builder()
+                .username("kiran")
+                .password(passwordEncoder.encode("kiran@123")) // Encode the password
+                .roles("USER")
+                .build();
+        
+        UserDetails user2 = User.builder()
+                .username("harsh")
+                .password(passwordEncoder.encode("harsh@123")) // Encode the password
+                .roles("ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(user1, user2);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // Use BCrypt for password hashing
+    }
+}
+
+
+```
+
