@@ -182,12 +182,12 @@ public class SecurityConfiguration {
         UserDetails user1 = User.builder()
                 
                 .username("kiran")
-                .password("$2a$12$JMObOadZlZSpKVxpPuJxIOAYIRDqACLJKYCdv1bAvMNLJnT9TG31.") // kiran@123
+                .password("$2a$12$.D1H5TLw03Ee7C9RvLwQF.PqVZz2M3U3CxSeVZM3uHFJhJvd/xxFy") // kiran@123
                 .roles(("USER"))  
                 .build(); // return the instance of userDetails
         UserDetails user2 = User.builder()
                 .username("harsh")
-                .password("$2a$12$hJtY4OJUyZFe1fDnozaMtOtfy10fsM1HVBNKpYh1y71ubJLu2ua6a") // harsh@123
+                .password("$2a$12$MWRbBr1tgGHdX96zBGpLKuDCZ9.4M/JQoWWQ1Z7hVyUYvJKCZsJNS") // harsh@123
                 .roles(("ADMIN"))
                 .build();
 
