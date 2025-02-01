@@ -153,7 +153,7 @@ public class SecurityConfiguration {
 ```
 
 
-- Inmemory User
+## Inmemory User
 ``` java
  @Bean
     public UserDetailsService userDetailsService() {
@@ -174,5 +174,25 @@ public class SecurityConfiguration {
         return new InMemoryUserDetailsManager(user1,user2);
     }
 ```
+## Without using default password encoder for in memory user's , we can use the hashed password
+``` java
+@Bean
+    public UserDetailsService userDetailsService() {
 
+        UserDetails user1 = User.builder()
+                
+                .username("kiran")
+                .password("$2a$12$JMObOadZlZSpKVxpPuJxIOAYIRDqACLJKYCdv1bAvMNLJnT9TG31.") // kiran@123
+                .roles(("USER"))  
+                .build(); // return the instance of userDetails
+        UserDetails user2 = User.builder()
+                .username("harsh")
+                .password("$2a$12$hJtY4OJUyZFe1fDnozaMtOtfy10fsM1HVBNKpYh1y71ubJLu2ua6a") // harsh@123
+                .roles(("ADMIN"))
+                .build();
+
+        return new InMemoryUserDetailsManager(user1,user2);
+    }
+
+```
 
