@@ -123,7 +123,40 @@ No partial updates happened.
 ```
 
 ---
+# Durability in Database Systems
 
+## What is Durability?
+
+- Durability is one of the **ACID** properties of database transactions.
+- It guarantees that once a transaction is **committed**, its changes are **permanent**.
+- Even if the database crashes, shuts down, or loses power immediately after the commit, the changes will **not be lost**.
+- This ensures **data reliability and trust** in the system.
+
+---
+
+## How is Durability Achieved?
+
+- Changes made by transactions are first written to **disk logs** (such as redo logs or binary logs).
+- These logs are stored on **non-volatile storage** (like HDDs or SSDs).
+- After a crash, the database uses these logs to **recover** and restore committed transactions.
+- This process guarantees that all committed data remains intact.
+
+---
+## Example in MySQL
+
+```sql
+START TRANSACTION;
+
+-- Insert a new order (this change will be durable after COMMIT)
+INSERT INTO orders (customer_id, total_amount, order_time)
+VALUES (101, 299.99, NOW());
+
+COMMIT;
+```
+
+**Explanation:**  
+- After `COMMIT`, even if the database crashes, the new order will not be lost due to durability.
+---
 
 
 
