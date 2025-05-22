@@ -9,6 +9,45 @@
 
 ---
 
+# Atomicity in Databases
+
+### What is Atomicity?
+
+- **Atomicity** means **"all or nothing"** for a set of database operations.
+- A transaction is a group of SQL statements executed as a single unit.
+- Either **all statements succeed and are committed**, or **if any statement fails, all changes are rolled back**.
+- This ensures the database never ends up in an inconsistent or partial state.
+
+---
+
+### How is Atomicity Implemented?
+
+- Atomicity is implemented using **transactions**.
+- In MySQL, use the commands:
+  - `START TRANSACTION;` — begin a transaction
+  - `COMMIT;` — save all changes if successful
+  - `ROLLBACK;` — undo all changes if an error occurs
+
+---
+
+### Example: Demonstrating Atomicity in MySQL
+
+#### Step 1: Create a sample `accounts` table
+
+```sql
+CREATE TABLE accounts (
+    account_id VARCHAR(10) PRIMARY KEY,
+    balance DECIMAL(10,2)
+);
+
+INSERT INTO accounts (account_id, balance) VALUES 
+('A', 1000.00),
+('B', 500.00);
+
+---
+
+
+
 ## 🛠️ MySQL Transaction Commands
 
 ```sql
@@ -28,8 +67,65 @@ UPDATE accounts SET balance = balance + 1000 WHERE account_id = 'B';
 
 COMMIT;
 ```
+- Step 2: Money transfer without transaction (no atomicity)
+```sql
+-- Deduct 200 from account A
+UPDATE accounts SET balance = balance - 200 WHERE account_id = 'A';
+
+-- Intentional error: wrong table name causes failure
+UPDATE accnt SET balance = balance + 200 WHERE account_id = 'B';
+```
+- RESULT
+
+  ```bash
+    The first update succeeds, deducting from A.
+    
+    The second update fails (table accnt doesn't exist).
+    
+    No rollback occurs, so the database is left inconsistent
+  ```
+  - Step 3: Money transfer with transaction (atomicity guaranteed)
+
+``` sql
+START TRANSACTION;
+
+UPDATE accounts SET balance = balance - 200 WHERE account_id = 'A';
+
+-- Intentional error to simulate failure
+UPDATE accnt SET balance = balance + 200 WHERE account_id = 'B';
+
+COMMIT;
+
+```
+- RESULT
+
+```bash
+
+The second statement fails.
+
+The transaction rolls back automatically.
+
+The balance of account A remains unchanged.
+
+Database remains consistent.
+```
+Step 4: Verify balances
+```sql
+
+Edit
+SELECT * FROM accounts;
+```
+-RESULT
+```bash
+Balances remain as before the transaction.
+
+No partial updates happened.
+```
 
 ---
+
+
+
 
 # 🍔 Scenario: Online Food Ordering System – Payment Process
 
